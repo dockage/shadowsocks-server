@@ -1,0 +1,69 @@
+#!/bin/bash
+set -e
+
+SS_SERVER_ADDRESS=${SS_SERVER_ADDRESS:-"0.0.0.0"}
+SS_SERVER_PORT=1443
+SS_LOCAL_ADDRESS=${SS_LOCAL_ADDRESS:-"127.0.0.1"}
+SS_LOCAL_PORT=${SS_LOCAL_PORT:-1080}
+SS_PASSWORD=${SS_PASSWORD:-sspass}
+SS_TIMEOUT=${SS_TIMEOUT:-300}
+SS_METHOD=${SS_METHOD:-"aes-256-cfb"}
+SS_FAST_OPEN=${SS_FAST_OPEN:-false}
+
+appInit () {
+  echo 'configure shadowsocks ...'
+cat > /etc/shadowsocks.json <<EOF
+{
+    "server":"${SS_SERVER_ADDRESS}",
+    "server_port":${SS_SERVER_PORT},
+    "local_address": "${SS_LOCAL_ADDRESS}",
+    "local_port":${SS_LOCAL_PORT},
+    "password":"${SS_PASSWORD}",
+    "timeout":${SS_TIMEOUT},
+    "method":"${SS_METHOD}",
+    "fast_open": ${SS_FAST_OPEN}
+}
+EOF
+}
+
+appStart () {
+  appInit
+
+  echo 'Start ...'
+  ssserver -c /etc/shadowsocks.json && tailf /var/log/shadowsocks.log
+}
+
+appHelp () {
+  echo "Available options:"
+  echo " start          - Starts the shadowsocks server (default)"
+  echo " init           - Initialize the shadowsocks but don't start it."
+  echo " help           - Displays the help"
+  echo " [command]      - Execute the specified linux command eg. bash."
+}
+
+case "$1" in
+  start)
+    appStart
+    ;;
+  init)
+    appInit
+    ;;
+  help)
+    appHelp
+    ;;
+  *)
+    if [ -x $1 ]; then
+      $1
+    else
+      prog=$(which $1)
+      if [ -n "${prog}" ] ; then
+        shift 1
+        $prog $@
+      else
+        appHelp
+      fi
+    fi
+    ;;
+esac
+
+exit 0
