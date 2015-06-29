@@ -11,7 +11,7 @@ SS_METHOD=${SS_METHOD:-"aes-256-cfb"}
 SS_FAST_OPEN=${SS_FAST_OPEN:-false}
 
 appInit () {
-    echo 'configure shadowsocks ...'
+    echo 'Configure shadowsocks ...'
     if [ "$SS_FAST_OPEN" = true ] ; then
         echo 3 > /proc/sys/net/ipv4/tcp_fastopen
     else
@@ -35,7 +35,7 @@ EOF
 appStart () {
   appInit
 
-  echo 'Start ...'
+  echo 'Start shadowsocks server ...'
   ssserver -c /etc/shadowsocks.json && tailf /var/log/shadowsocks.log
 }
 
