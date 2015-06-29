@@ -2,7 +2,7 @@
 set -e
 
 SS_SERVER_ADDRESS=${SS_SERVER_ADDRESS:-"0.0.0.0"}
-SS_SERVER_PORT=1443
+SS_SERVER_PORT=${SS_SERVER_PORT:-1443}
 SS_LOCAL_ADDRESS=${SS_LOCAL_ADDRESS:-"127.0.0.1"}
 SS_LOCAL_PORT=${SS_LOCAL_PORT:-1080}
 SS_PASSWORD=${SS_PASSWORD:-sspass}
@@ -11,7 +11,13 @@ SS_METHOD=${SS_METHOD:-"aes-256-cfb"}
 SS_FAST_OPEN=${SS_FAST_OPEN:-false}
 
 appInit () {
-  echo 'configure shadowsocks ...'
+    echo 'configure shadowsocks ...'
+    if [ "$SS_FAST_OPEN" = true ] ; then
+        echo 3 > /proc/sys/net/ipv4/tcp_fastopen
+    else
+        echo 0 > /proc/sys/net/ipv4/tcp_fastopen
+    fi
+
 cat > /etc/shadowsocks.json <<EOF
 {
     "server":"${SS_SERVER_ADDRESS}",
