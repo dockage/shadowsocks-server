@@ -10,12 +10,19 @@ SS_TIMEOUT=${SS_TIMEOUT:-300}
 SS_METHOD=${SS_METHOD:-"aes-256-cfb"}
 SS_FAST_OPEN=${SS_FAST_OPEN:-false}
 
+TCP_FAST_OPEN_FILE='/proc/sys/net/ipv4/tcp_fastopen'
+
 appInit () {
     echo 'Configure shadowsocks ...'
-    if [ "$SS_FAST_OPEN" = true ] ; then
-        echo 3 > /proc/sys/net/ipv4/tcp_fastopen
+
+    if [ -f ${TCP_FAST_OPEN_FILE} ]; then
+        if [ "$SS_FAST_OPEN" = true ] ; then
+            echo 3 > ${TCP_FAST_OPEN_FILE}
+        else
+            echo 0 > ${TCP_FAST_OPEN_FILE}
+        fi
     else
-        echo 0 > /proc/sys/net/ipv4/tcp_fastopen
+        SS_FAST_OPEN=false
     fi
 
 cat > /etc/shadowsocks.json <<EOF
