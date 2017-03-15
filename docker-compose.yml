@@ -1,8 +1,7 @@
 shadowsocks:
-  image: dockerzone/shadowsocks-server:2.6.10
+  image: dockage/shadowsocks-server:latest
   ports:
-    - "1443:1443"
+    - "8388:8388"
   environment:
-    - SS_SERVER_PORT=1443
-    - SS_PASSWORD=sspass
+    - SS_PASSWORD=ssp@ss
     - SS_METHOD=aes-256-cfb

@@ -1,18 +1,17 @@
-FROM debian:jessie
+FROM alpine:3.5
 MAINTAINER Mohammad Abdoli Rad <m.abdolirad@gmail.com>
 
-RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive apt-get install -y nano python-pip \
- && rm -rf /var/lib/apt/lists/*
+ENV SS_SERVER_ADDR=0.0.0.0 \
+    SS_SERVER_PORT=8388 \
+    SS_PASSWORD=ssp@ss \
+    SS_METHOD=aes-256-cfb \
+    SS_TIMEOUT=300
 
-COPY assets/install /opt/install
-RUN chmod 755 /opt/install
-RUN /opt/install
+RUN echo '@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing/' >> /etc/apk/repositories \
+    && apk update \
+    && apk --no-cache add shadowsocks-libev@testing \
+    && rm -rf /var/cache/apk/*
 
-COPY assets/init /opt/init
-RUN chmod 755 /opt/init
+EXPOSE ${SS_SERVER_PORT}/tcp ${SS_SERVER_PORT}/udp
 
-ENTRYPOINT ["/opt/init"]
-CMD ["start"]
-
-EXPOSE 1443
+ENTRYPOINT /usr/bin/ss-server -s ${SS_SERVER_ADDR} -p ${SS_SERVER_PORT} -k ${SS_PASSWORD} -m ${SS_METHOD} -t ${SS_TIMEOUT}
