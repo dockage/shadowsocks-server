@@ -1,4 +1,4 @@
-# Shadowsocks Server [![Docker Pulls](https://img.shields.io/docker/pulls/dockage/shadowsocks-server.svg?style=flat)](https://registry.hub.docker.com/u/dockage/shadowsocks-server/) [![Docker Stars](https://img.shields.io/docker/stars/dockage/shadowsocks-server.svg?style=flat)](https://registry.hub.docker.com/u/dockage/shadowsocks-server/)
+# Shadowsocks Server [![Docker Pulls](https://img.shields.io/docker/pulls/dockage/shadowsocks-server.svg?style=flat)](https://hub.docker.com/r/dockage/shadowsocks-server/) [![Docker Stars](https://img.shields.io/docker/stars/dockage/shadowsocks-server.svg?style=flat)](https://hub.docker.com/r/dockage/shadowsocks-server/) [![MicroBadger](https://images.microbadger.com/badges/image/dockage/shadowsocks-server.svg)](https://microbadger.com/images/dockage/shadowsocks-server) [![Docker Automated build](https://img.shields.io/docker/automated/dockage/shadowsocks-server.svg?style=flat)](https://hub.docker.com/r/dockage/shadowsocks-server/)
 A secure socks5 proxy, designed to protect your Internet traffic.
 
 
