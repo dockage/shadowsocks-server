@@ -1,5 +1,3 @@
-# Deprecated
-## Please use the official images like [shadowsocks-libev](https://hub.docker.com/r/shadowsocks/shadowsocks-libev) or [shadowsocks-rust](https://github.com/shadowsocks/shadowsocks-rust/pkgs/container/ssserver-rust) instead of this project. 
 # Shadowsocks Server [![Docker Pulls](https://img.shields.io/docker/pulls/dockage/shadowsocks-server.svg?style=flat)](https://hub.docker.com/r/dockage/shadowsocks-server/) [![Docker Stars](https://img.shields.io/docker/stars/dockage/shadowsocks-server.svg?style=flat)](https://hub.docker.com/r/dockage/shadowsocks-server/) [![MicroBadger](https://images.microbadger.com/badges/image/dockage/shadowsocks-server.svg)](https://microbadger.com/images/dockage/shadowsocks-server) [![Docker Automated build](https://img.shields.io/docker/automated/dockage/shadowsocks-server.svg?style=flat)](https://hub.docker.com/r/dockage/shadowsocks-server/)
 A secure socks5 proxy, designed to protect your Internet traffic.
 
@@ -82,8 +80,9 @@ docker run --name=shadowsocks -d [OPTIONS] dockage/shadowsocks-server:latest
 
 For more information refer https://github.com/jpetazzo/nsenter
 
-# References
-  * https://github.com/shadowsocks/shadowsocks
-  * https://github.com/shadowsocks/shadowsocks/wiki/Encryption
-  * https://github.com/shadowsocks/shadowsocks/wiki/Configuration-via-Config-File
-  * https://github.com/shadowsocks/shadowsocks/wiki/TCP-Fast-Open
+## Quick reference
+* Where to get help: [website](https://dockage.dev/), [documentation](https://dockage.dev/docs/)
+* GitHub repo: [dockage/php](https://github.com/dockage/php)
+* Where to file issues: [GitHub issues](https://github.com/dockage/php/issues)
+* Maintained by: The Dockage team (info at dockage.dev)
+* License(s) - [license](https://github.com/dockage/php/blob/main/LICENSE), check 3rd party documentation for license information
